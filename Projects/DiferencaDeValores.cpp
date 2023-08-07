@@ -12,13 +12,13 @@ int main()
     cin >> num1;
     cout << "o valor recebido: " << endl;
     cin >> num2;
-    num3 = num1 - num2;     //calcular num3
-    cout << "o resultado é: " << num3 << endl; //plot num3
+    num3 = num1 - num2;     // calcular num3
+    cout << "o resultado é: " << num3 << endl; // plot num3
 
     if (num3 >= 20 && num3 <= 100) {
         aux = num3 - (num3 % 10); // para obter dezena mais próxima
 
-        switch (aux) {
+        switch (aux) {          // definindo as dezenas por extenso que serão plotadas
             case 20:  cout << "vinte";           break;
             case 30:  cout << "trinta";          break;
             case 40:  cout << "quarenta";        break;
@@ -34,7 +34,7 @@ int main()
         if (num3 % 10 > 0) {
             cout << " e ";
             aux = num3 % 10;
-            switch (aux) {
+            switch (aux) {      // definindo as unidades por extenso que serão plotadas
                 case 1:  cout << "um";               break;
                 case 2:  cout << "dois";             break;
                 case 3:  cout << "três";             break;
@@ -48,7 +48,7 @@ int main()
             }
         }
     } else if (num3 <= 19) {
-        switch (num3) {
+        switch (num3) {         // definindo os numeros "especiais" por extenso que serão plotados
             case 0:  cout << "zero";            break;
             case 1:  cout << "um";              break;
             case 2:  cout << "dois";            break;
@@ -71,7 +71,7 @@ int main()
             case 19: cout << "dezenove";        break;
             default: cout << "Fora do padrão";  break;
         }
-    } else {
+    } else {    // if resultado acima de 100
         cout << "Número fora do intervalo permitido.";
     }
 
