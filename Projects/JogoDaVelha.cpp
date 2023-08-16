@@ -1,144 +1,70 @@
-// Primeiro grande projeto
 #include <iostream>
-#include <locale>
-#include <iomanip>
+#include <vector>
 
 using namespace std;
 
-int main() {
-    // variavel para o player atual e sua posicao de escolha
-    char currentPlayer = 'X';
-    int row, col;
-  	int gameOn;
-  	char board[0][2];
-  	setlocale(LC_ALL, "Portuguese");
-  	
-    // main loop do app
-    while (true) {
-        // Impressao do tabuleiro
-        cout << "Tabuleiro atual:" << endl;
-        cout << "     0   1   2 "  << endl;
-        cout << "  +---+---+---+"  << endl;
-        cout << "0 |   |   |   |"  << endl;
-        cout << "  +---+---+---+"  << endl;
-        cout << "1 |   |   |   |"  << endl;
-        cout << "  +---+---+---+"  << endl;
-        cout << "2 |   |   |   |"  << endl;
-        cout << "  +---+---+---+"  << endl;
+// Função para imprimir o tabuleiro
+void printBoard(const vector<vector<char>>& board) {
+    cout << "   0   1   2" << endl;
+    cout << " +---+---+---+" << endl;
+    for (int i = 0; i < 3; ++i) {
+        cout << i << "| ";
+        for (int j = 0; j < 3; ++j) {
+            cout << board[i][j] << " | ";
+        }
+        cout << endl << " +---+---+---+" << endl;
+    }
+}
 
-        // peca para o jogador atual escolher uma posicao no tabuleiro
-        cout << "Jogador " << currentPlayer << ", escolha uma posicao (linha coluna): ";
-        cin >> row >> col;
 
-        // verificando a posicao, se ela eh valida ou nao
-        if (row < 0 || row > 2 || col < 0 || col > 2)
-        {
-            cout << "Posicao invalida, escolha outra dentro do tabuleiro." << endl;
-            continue;
+// Função para verificar se um jogador venceu
+bool checkWin(const vector<vector<char>>& board, char player) {
+    for (int i = 0; i < 3; ++i) {
+        if (board[i][0] == player && board[i][1] == player && board[i][2] == player) {
+            return true;  // Linhas
         }
-        if ((row == 0 && col == 0) || (row == 1 && col == 0) || (row == 2 && col == 0))
-        {
-            cout << "posicao ja ocupada, escolha outra." << endl;
-            continue;
-        }
-
-        // Att do tabuleiro com a jogada atual
-        if (row == 0 && col == 1)
-        {
-            cout << "Jogada do jogador " << currentPlayer << " aceita!" << endl;
-            cout << "     0   1   2"  << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "0 | " << currentPlayer << " |   |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "1 |   |   |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "2 |   |   |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-        }
-        else if (row == 0 && col == 2)
-        {
-            cout << "Jogada do jogador " << currentPlayer << " aceita!" << endl;
-            cout << "     0   1   2"  << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "0 |   | " << currentPlayer << " |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "1 |   |   |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "2 |   |   |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-        }
-        else if (row == 1 && col == 1)
-        {
-            cout << "Jogada do jogador " << currentPlayer << " aceita!" << endl;
-            cout << "     0   1   2"  << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "0 |   |   |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "1 |   | " << currentPlayer << " |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "2 |   |   |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-        }
-        else if (row == 1 && col == 2)
-        {
-            cout << "Jogada do jogador " << currentPlayer << " aceita!" << endl;
-            cout << "     0   1   2"  << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "0 |   |   |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "1 |   |   | " << currentPlayer << " |" << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "2 |   |   |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-        }
-        else if (row == 2 && col == 1)
-        {
-            cout << "Jogada do jogador " << currentPlayer << " aceita!" << endl;
-            cout << "     0   1   2"  << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "0 |   |   |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "1 |   |   |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "2 | " << currentPlayer << " |   |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-        }
-        else if (row == 2 && col == 2)
-        {
-            cout << "Jogada do jogador " << currentPlayer << " aceita!" << endl;
-            cout << "     0   1   2"  << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "0 |   |   |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "1 |   |   |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-            cout << "2 |   | " << currentPlayer << " |   |" << endl;
-            cout << "  +---+---+---+" << endl;
-        }
-
-        // Verificando se houve vencedor ou empate
-        if (
-            // linhas
-            ((row == 0 && col == 1) && ((currentPlayer == 'X' && ((cout << "Jogador X ganhou!" << endl) || true)) || (cout << "Jogador O ganhou!" << endl))) ||
-            ((row == 1 && col == 1) && ((currentPlayer == 'X' && ((cout << "Jogador X ganhou!" << endl) || true)) || (cout << "Jogador O ganhou!" << endl))) ||
-            ((row == 2 && col == 1) && ((currentPlayer == 'X' && ((cout << "Jogador X ganhou!" << endl) || true)) || (cout << "Jogador O ganhou!" << endl))) ||
-            // colunas
-            ((row == 0 && col == 0) && ((currentPlayer == 'X' && ((cout << "Jogador X ganhou!" << endl) || true)) || (cout << "Jogador O ganhou!" << endl))) ||
-            ((row == 1 && col == 0) && ((currentPlayer == 'X' && ((cout << "Jogador X ganhou!" << endl) || true)) || (cout << "Jogador O ganhou!" << endl))) ||
-            ((row == 2 && col == 0) && ((currentPlayer == 'X' && ((cout << "Jogador X ganhou!" << endl) || true)) || (cout << "Jogador O ganhou!" << endl))) ||
-            // diagonais
-            ((row == 0 && col == 0) && ((currentPlayer == 'X' && ((cout << "Jogador X ganhou!" << endl) || true)) || (cout << "Jogador O ganhou!" << endl))) ||
-            ((row == 2 && col == 2) && ((currentPlayer == 'X' && ((cout << "Jogador X ganhou!" << endl) || true)) || (cout << "Jogador O ganhou!" << endl))) ||
-            // empate
-            ((board[0][0] != ' ' && board[0][1] != ' ' && board[0][2] != ' ' &&
-              board[1][0] != ' ' && board[1][1] != ' ' && board[1][2] != ' ' &&
-              board[2][0] != ' ' && board[2][1] != ' ' && board[2][2] != ' ')&& ((cout << "Empate!" << endl) || true)))
-        {
-            gameOn = false;
-        }
-        else {
-            currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+        if (board[0][i] == player && board[1][i] == player && board[2][i] == player) {
+            return true;  // Colunas
         }
     }
+    if (board[0][0] == player && board[1][1] == player && board[2][2] == player) {
+        return true;  // Diagonal principal
+    }
+    if (board[0][2] == player && board[1][1] == player && board[2][0] == player) {
+        return true;  // Diagonal secundária
+    }
+    return false;
+}
+
+int main() {
+    vector<vector<char>> board(3, vector<char>(3, ' '));  // Inicializa o tabuleiro vazio
+    char currentPlayer = 'X';
+    int row, col;
+    
+    cout << "Bem-vindo ao Tic-Tac-Toe!" << endl;
+
+    for (int turn = 0; turn < 9; ++turn) {
+        cout << "Jogador " << currentPlayer << ", escolha a linha (0-2) e depois a coluna (0-2): ";
+        cin >> row >> col;
+
+        if (row < 0 || row > 2 || col < 0 || col > 2 || board[row][col] != ' ') {
+            cout << "Jogada inválida, tente novamente." << endl;
+            --turn;  // Repetir a vez do jogador atual
+            continue;
+        }
+
+        board[row][col] = currentPlayer;
+        printBoard(board);
+
+        if (checkWin(board, currentPlayer)) {
+            cout << "Jogador " << currentPlayer << " venceu!" << endl;
+            break;
+        }
+
+        currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+    }
+
+    cout << "Fim do jogo!" << endl;
+
     return 0;
 }
