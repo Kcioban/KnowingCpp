@@ -1,4 +1,4 @@
-Conceitos Básicos:
+# Conceitos Básicos:
 
 1.  `Compilação` : O código é escrito em um arquivo de texto com a extensão  `.cpp` .
 2.  `Funções` : A linguagem é organizada em funções. A função principal em um programa C++ é chamada de  `main()` , e é onde a execução do programa começa. 
