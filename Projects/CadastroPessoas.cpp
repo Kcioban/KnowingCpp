@@ -1,5 +1,4 @@
-// Ele está com um erro na atualização em caso de nomes compostos (contem espaço)
-// Base
+// Header - Base
 #include <iostream>
 #include <vector>
 #include <string>
@@ -7,8 +6,7 @@ using namespace std;
 
 // Armazenar dados
 struct Pessoa {
-    string nome;
-    int idade;
+    string codigo, nome, rua, bairro, cidade, estado, cep, celular, email, cpf, rg;
 };
 
 // Criação
@@ -16,12 +14,42 @@ vector<Pessoa> pessoas;
 
 void criarPessoa() {
     Pessoa pessoa;
+    cout << "Digite o codigo: ";
+    cin >> pessoa.codigo;
+
     cout << "Digite o nome: ";
-    cin.ignore(); // Limpa o buffer do cin antes de ler a linha completa
+    cin.ignore(); // limpa o buffer do enter
     getline(cin, pessoa.nome);
-    cout << "Digite a idade: ";
-    cin >> pessoa.idade;
+
+    cout << "Digite a rua: ";
+    getline(cin, pessoa.rua);
+
+    cout << "Digite o bairro: ";
+    getline(cin, pessoa.bairro);
+
+    cout << "Digite a cidade: ";
+    getline(cin, pessoa.cidade);
+
+    cout << "Digite o estado: ";
+    getline(cin, pessoa.estado);
+
+    cout << "Digite o CEP: ";
+    getline(cin, pessoa.cep);
+
+    cout << "Digite o celular: ";
+    getline(cin, pessoa.celular);
+
+    cout << "Digite o e-mail: ";
+    getline(cin, pessoa.email);
+
+    cout << "Digite o CPF: ";
+    getline(cin, pessoa.cpf);
+
+    cout << "Digite o RG: ";
+    getline(cin, pessoa.rg);
+
     pessoas.push_back(pessoa);
+
     cout << "Pessoa criada com sucesso!" << endl;
 }
 
@@ -32,34 +60,75 @@ void listarPessoas() {
     } else {
         cout << "Lista de pessoas:" << endl;
         for (const auto & pessoa : pessoas) {
-            cout << "Nome: " << pessoa.nome << ", Idade: " << pessoa.idade << endl;
+            // Impressão dos dados
+            cout << "\nDados da Pessoa:\n";
+            cout << "Código: "  << pessoa.codigo    << endl;
+            cout << "Nome: "    << pessoa.nome      << endl;
+            cout << "Rua: "     << pessoa.rua       << endl;
+            cout << "Bairro: "  << pessoa.bairro    << endl;
+            cout << "Cidade: "  << pessoa.cidade    << endl;
+            cout << "Estado: "  << pessoa.estado    << endl;
+            cout << "CEP: "     << pessoa.cep       << endl;
+            cout << "Celular: " << pessoa.celular   << endl;
+            cout << "E-mail: "  << pessoa.email     << endl;
+            cout << "CPF: "     << pessoa.cpf       << endl;
+            cout << "RG: "      << pessoa.rg        << endl;
         }
     }
 }
 
 // Atualização
-// VERIFICAR PORQUE ESTÁ DANDO ERRO COM STRING TENDO ESPAÇO (' ')
 void atualizarPessoa() {
     if (pessoas.empty()) {
         cout << "Nenhuma pessoa cadastrada." << endl;
     } else {
-        string nome;
+        string nomeAux;
         cout << "Digite o nome da pessoa que deseja atualizar: ";
-        cin >> nome;
+        getline(cin, nomeAux);
+        cin.ignore(); // limpa o buffer do enter
         bool encontrou = false;
         for (auto& pessoa : pessoas) {
-            if (pessoa.nome == nome) {
+            if (pessoa.nome == nomeAux) {
                 cout << "Digite o novo nome: ";
                 getline(cin, pessoa.nome);
-                cout << "Digite a nova idade: ";
-                cin >> pessoa.idade;
+
+                cout << "Digite o novo código: ";
+                cin >> pessoa.codigo;
+
+                cout << "Digite a nova rua: ";
+                cin.ignore(); // limpa o buffer do enter
+                getline(cin, pessoa.rua);
+
+                cout << "Digite o novo bairro: ";
+                getline(cin, pessoa.bairro);
+
+                cout << "Digite a nova cidade: ";
+                getline(cin, pessoa.cidade);
+
+                cout << "Digite o novo estado: ";
+                getline(cin, pessoa.estado);
+
+                cout << "Digite o novo CEP: ";
+                getline(cin, pessoa.cep);
+
+                cout << "Digite o novo celular: ";
+                getline(cin, pessoa.celular);
+
+                cout << "Digite o novo e-mail: ";
+                getline(cin, pessoa.email);
+
+                cout << "Digite o novo CPF: ";
+                getline(cin, pessoa.cpf);
+
+                cout << "Digite o novo RG: ";
+                getline(cin, pessoa.rg);
                 encontrou = true;
                 cout << "Pessoa atualizada com sucesso!" << endl;
                 break;
             }
         }
         if (!encontrou) {
-            cout << "Pessoa não encontrada." << endl;
+            cout << "Pessoa nao encontrada." << endl;
         }
     }
 }
@@ -71,10 +140,10 @@ void deletarPessoa() {
     } else {
         string nome;
         cout << "Digite o nome da pessoa que deseja deletar: ";
-        cin >> nome;
+        getline(cin, nome);
+        cin.ignore(); // limpa o buffer do enter
         bool encontrou = false;
 
-        // auto serve para que o compilador determine automaticamente o tipo da variavel, nesso caso it recebe 'string'
         for (auto it = pessoas.begin(); it != pessoas.end(); ++it) {
             if (it->nome == nome) {
                 pessoas.erase(it);
@@ -84,14 +153,13 @@ void deletarPessoa() {
             }
         }
         if (!encontrou) {
-            cout << "Pessoa não encontrada." << endl;
+            cout << "Pessoa nao encontrada." << endl;
         }
     }
 }
 
 // Menu
 int main() {
-  
     setlocale(LC_ALL, "Portuguese");
     int opcao;
 
@@ -102,9 +170,9 @@ int main() {
         cout << "3. Atualizar pessoa" << endl;
         cout << "4. Deletar pessoa"   << endl;
         cout << "5. Sair"             << endl;
-        cout << "Digite a opção desejada: ";
+        cout << "Digite a opcao desejada: ";
         cin >> opcao;
-        cin.ignore();
+        cin.ignore(); // limpa o buffer do enter
 
         switch (opcao) {
             case 1:
@@ -126,9 +194,9 @@ int main() {
                 return 0;
           
             default:
-                cout << "Opção inválida." << endl;
+                cout << "Opcao inválida." << endl;
                 break;
         }
         cout << endl;
-}
+    }
 }
