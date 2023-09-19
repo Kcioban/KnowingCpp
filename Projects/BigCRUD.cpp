@@ -3,13 +3,13 @@
 #include <vector>
 #include <string>
 using namespace std;
-    // ==================================================================
+    // -------------------------------------------------------------------
 
 // Armazenar dados
 struct Pessoa {
     string nome, rua, bairro, cidade, estado, email, codigo, cep, cpf, rg, idade;
 };
-    // ==================================================================
+    // -------------------------------------------------------------------
 
 // Criação
 vector<Pessoa> pessoas;
@@ -18,50 +18,50 @@ void criarPessoa() {
     Pessoa pessoa;
     cout << "Digite o código: ";
     cin >> pessoa.codigo;
-    // ==================================================================
+    // -------------------------------------------------------------------
     cout << "Digite o nome: ";
-    cin.ignore(); // Limpa o buffer do cin antes de ler a linha completa
+    cin.ignore(); // ignora o buffering do enter para que não de conflito de hash
     getline(cin, pessoa.nome);
-    // ==================================================================
+    // -------------------------------------------------------------------
     cout << "Digite a idade: ";
     cin >> pessoa.idade;
-    // ==================================================================
+    // -------------------------------------------------------------------
     cout << "Digite o CPF: ";
-    cin.ignore(); // Limpa o buffer de entrada
+    cin.ignore(); 
     cin >> pessoa.cpf;
-    // ==================================================================
+    // -------------------------------------------------------------------
     cout << "Digite o RG: ";
-    cin.ignore();
+    cin.ignore(); 
     cin >> pessoa.rg;
-    // ==================================================================
+    // -------------------------------------------------------------------
     cout << "Digite o CEP: ";
-    cin.ignore();
+    cin.ignore(); 
     cin >> pessoa.cep;
-    // ==================================================================
+    // -------------------------------------------------------------------
     cout << "Digite a rua: ";
     cin.ignore();
     getline(cin, pessoa.rua);
-    // ==================================================================
+    // -------------------------------------------------------------------
     cout << "Digite o bairro: ";
-    cin.ignore();
+    cin.ignore(); 
     getline(cin, pessoa.bairro);
-    // ==================================================================
+    // -------------------------------------------------------------------
     cout << "Digite a cidade: ";
-    cin.ignore();
+    cin.ignore(); 
     getline(cin, pessoa.cidade);
-    // ==================================================================
+    // -------------------------------------------------------------------
     cout << "Digite o estado: ";
     cin.ignore();
     getline(cin, pessoa.estado);
-    // ==================================================================
+    // -------------------------------------------------------------------
     cout << "Digite o email: ";
-    cin.ignore();
+    cin.ignore(); // ignora o buffering do enter para que não de conflito de hash
     getline(cin, pessoa.email);
-    // ==================================================================
+    // -------------------------------------------------------------------
     pessoas.push_back(pessoa);
     cout << "Pessoa criada com sucesso!" << endl;
 }
-    // ==================================================================
+    // -------------------------------------------------------------------
 
 // Listagem - Consulta dos dados
 void listarPessoas() {
@@ -74,7 +74,7 @@ void listarPessoas() {
         }
     }
 }
-    // ==================================================================
+    // -------------------------------------------------------------------
 
 // Atualização
 void atualizarPessoa() {
@@ -83,7 +83,7 @@ void atualizarPessoa() {
     } else {
         string nome;
         cout << "Digite o nome da pessoa que deseja atualizar: ";
-        cin.ignore(); // Limpa o buffer de entrada
+        cin.ignore(); // ignora o buffering do enter para que não de conflito de hash
         getline(cin, nome);
         bool encontrou = false;
         for (auto& pessoa : pessoas) {
@@ -102,7 +102,7 @@ void atualizarPessoa() {
         }
     }
 }
-    // ==================================================================
+    // -------------------------------------------------------------------
 
 // Deletar
 void deletarPessoa() {
@@ -111,7 +111,7 @@ void deletarPessoa() {
     } else {
         string nome;
         cout << "Digite o nome da pessoa que deseja deletar: ";
-        cin.ignore();
+        cin.ignore(); // ignora o buffering do enter para que não de conflito de hash
         getline(cin, nome);
         bool encontrou = false;
 
@@ -128,7 +128,7 @@ void deletarPessoa() {
         }
     }
 }
-    // ==================================================================
+    // -------------------------------------------------------------------
 
 // Menu
 int main() {
@@ -144,8 +144,8 @@ int main() {
         cout << "5. Sair" << endl;
         cout << "Digite a opção desejada: ";
         cin >> opcao;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa todo o buffer até a quebra de linha
-    // ==================================================================
+        //cin.ignore(numeric_limits<streamsize>::max(), '\n'); // dando erro, verificar.
+    // -------------------------------------------------------------------
         switch (opcao) {
             case 1:
                 criarPessoa();
