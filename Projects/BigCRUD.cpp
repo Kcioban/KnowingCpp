@@ -1,150 +1,200 @@
-// Base
-#include <iostream>
-#include <vector>
-#include <string>
-using namespace std;
-    // -------------------------------------------------------------------
+// Header - Base
+#include <iostream> // base
+#include <vector>   // vetores
+#include <string>   // strings
+#include <iomanip>  // manipulação de saidas
 
-// Armazenar dados
+using namespace std; // aux para std::cout
+// -------------------------------------------------------------------
 struct Pessoa {
-    string nome, rua, bairro, cidade, estado, email, codigo, cep, cpf, rg, idade;
+    int codigo, idade;
+    string nome, rua, bairro, cidade, estado, email, cep, cpf, rg;
 };
-    // -------------------------------------------------------------------
-
-// Criação
+// -------------------------------------------------------------------
 vector<Pessoa> pessoas;
-
+// -------------------------------------------------------------------
 void criarPessoa() {
     Pessoa pessoa;
+    cout << "Para iniciar a criação do seu perfil. " << endl;
     cout << "Digite o código: ";
     cin >> pessoa.codigo;
-    // -------------------------------------------------------------------
+// -------------------------------------------------------------------
     cout << "Digite o nome: ";
-    cin.ignore(); // ignora o buffering do enter para que não de conflito de hash
+    cin.ignore(); // Limpa o buffer do cin antes de ler a linha completa
     getline(cin, pessoa.nome);
-    // -------------------------------------------------------------------
-    cout << "Digite a idade: ";
-    cin >> pessoa.idade;
-    // -------------------------------------------------------------------
+// -------------------------------------------------------------------
+    /*cout << "Digite a idade: ";
+    cin.ignore();
+    cin >> pessoa.idade; */
+// -------------------------------------------------------------------
     cout << "Digite o CPF: ";
-    cin.ignore(); 
+    cin.ignore(); // Limpa o buffer de entrada
     cin >> pessoa.cpf;
-    // -------------------------------------------------------------------
+// -------------------------------------------------------------------
     cout << "Digite o RG: ";
-    cin.ignore(); 
+    cin.ignore();
     cin >> pessoa.rg;
-    // -------------------------------------------------------------------
+// -------------------------------------------------------------------
     cout << "Digite o CEP: ";
-    cin.ignore(); 
+    cin.ignore();
     cin >> pessoa.cep;
-    // -------------------------------------------------------------------
+// -------------------------------------------------------------------
     cout << "Digite a rua: ";
     cin.ignore();
     getline(cin, pessoa.rua);
-    // -------------------------------------------------------------------
+// -------------------------------------------------------------------
     cout << "Digite o bairro: ";
-    cin.ignore(); 
+    cin.ignore();
     getline(cin, pessoa.bairro);
-    // -------------------------------------------------------------------
+// -------------------------------------------------------------------
     cout << "Digite a cidade: ";
-    cin.ignore(); 
+    cin.ignore();
     getline(cin, pessoa.cidade);
-    // -------------------------------------------------------------------
+// -------------------------------------------------------------------
     cout << "Digite o estado: ";
     cin.ignore();
     getline(cin, pessoa.estado);
-    // -------------------------------------------------------------------
+// -------------------------------------------------------------------
     cout << "Digite o email: ";
-    cin.ignore(); // ignora o buffering do enter para que não de conflito de hash
+    cin.ignore();
     getline(cin, pessoa.email);
-    // -------------------------------------------------------------------
+// -------------------------------------------------------------------
     pessoas.push_back(pessoa);
-    cout << "Pessoa criada com sucesso!" << endl;
+    cout << "Perfil criado com sucesso!" << endl;
 }
-    // -------------------------------------------------------------------
-
-// Listagem - Consulta dos dados
+// -------------------------------------------------------------------
 void listarPessoas() {
     if (pessoas.empty()) {
-        cout << "Nenhuma pessoa cadastrada." << endl;
+        cout << "Nenhum perfil cadastrado." << endl;
     } else {
-        cout << "Lista de pessoas:" << endl;
+        cout << "Lista de perfis:" << endl;
         for (const auto & pessoa : pessoas) {
-            cout << "Nome: " << pessoa.nome << ", Idade: " << pessoa.idade << endl;
+        
+    // Tabela
+        cout << setfill('_') << setw(40) << "_" << endl; // Linha
+        cout << "\n Ficha de cadastro\n";
+        cout << setfill('-') << setw(40) << "-" << endl;
+    // -----------------------------------------------------------------------------------------
+        cout << left << setw(16) << "| Código "     << "| " << pessoa.codigo    << " |" << endl;
+        cout << left << setw(15) << "| Nome "       << "| " << pessoa.nome      << " |" << endl;
+      //cout << left << setw(15) << "| Idade "      << "| " << pessoa.idade     << " |" << endl;
+        cout << left << setw(15) << "| Rua "        << "| " << pessoa.rua       << " |" << endl;
+        cout << left << setw(15) << "| Bairro "     << "| " << pessoa.bairro    << " |" << endl;
+        cout << left << setw(15) << "| Cidade "     << "| " << pessoa.cidade    << " |" << endl;
+        cout << left << setw(15) << "| Estado "     << "| " << pessoa.estado    << " |" << endl;
+        cout << left << setw(15) << "| CEP "        << "| " << pessoa.cep       << " |" << endl;
+        cout << left << setw(15) << "| Celular "    << "| " << pessoa.celular   << " |" << endl;
+        cout << left << setw(15) << "| Email "      << "| " << pessoa.email     << " |" << endl;
+        cout << left << setw(15) << "| CPF "        << "| " << pessoa.cpf       << " |" << endl;
+        cout << left << setw(15) << "| RG "         << "| " << pessoa.rg        << " |" << endl;
         }
     }
 }
     // -------------------------------------------------------------------
 
-// Atualização
 void atualizarPessoa() {
     if (pessoas.empty()) {
-        cout << "Nenhuma pessoa cadastrada." << endl;
+        cout << "Nenhum perfil cadastrado." << endl;
     } else {
-        string nome;
-        cout << "Digite o nome da pessoa que deseja atualizar: ";
-        cin.ignore(); // ignora o buffering do enter para que não de conflito de hash
-        getline(cin, nome);
+        string nomeAux;
+        cout << "Digite o nome da pessoa que deseja atualizar o perfil: ";
+        getline(cin, nomeAux);
+        cin.ignore(); // limpa o buffer do enter
         bool encontrou = false;
         for (auto& pessoa : pessoas) {
-            if (pessoa.nome == nome) {
+            if (pessoa.nome == nomeAux) {
+                cout << "Digite o novo código: ";
+                cin >> pessoa.codigo;
+            // -------------------------------------------------------------------
                 cout << "Digite o novo nome: ";
+                cin.ignore(); // limpa o buffer do enter
                 getline(cin, pessoa.nome);
-                cout << "Digite a nova idade: ";
-                cin >> pessoa.idade;
+            // -------------------------------------------------------------------
+                cout << "Digite a nova rua: ";
+                cin.ignore(); 
+                getline(cin, pessoa.rua);
+            // -------------------------------------------------------------------
+                cout << "Digite o novo bairro: ";
+                cin.ignore();
+                getline(cin, pessoa.bairro);
+            // -------------------------------------------------------------------
+                cout << "Digite a nova cidade: ";
+                cin.ignore();
+                getline(cin, pessoa.cidade);
+            // -------------------------------------------------------------------
+                cout << "Digite o novo estado: ";
+                cin.ignore();
+                getline(cin, pessoa.estado);
+            // -------------------------------------------------------------------
+                cout << "Digite o novo CEP: ";
+                cin.ignore();
+                getline(cin, pessoa.cep);
+            // -------------------------------------------------------------------
+                cout << "Digite o novo celular: ";
+                cin.ignore();
+                getline(cin, pessoa.celular);
+            // -------------------------------------------------------------------
+                cout << "Digite o novo e-mail: ";
+                cin.ignore();
+                getline(cin, pessoa.email);
+            // -------------------------------------------------------------------
+                cout << "Digite o novo CPF: ";
+                cin.ignore();
+                getline(cin, pessoa.cpf);
+            // -------------------------------------------------------------------
+                cout << "Digite o novo RG: ";
+                cin.ignore();
+                getline(cin, pessoa.rg);
+            // -------------------------------------------------------------------
                 encontrou = true;
-                cout << "Pessoa atualizada com sucesso!" << endl;
+                cout << "Perfil atualizado com sucesso!" << endl;
                 break;
             }
         }
         if (!encontrou) {
-            cout << "Pessoa não encontrada." << endl;
+            cout << "Perfil nao encontrado." << endl;
         }
     }
 }
-    // -------------------------------------------------------------------
-
-// Deletar
+// -------------------------------------------------------------------
 void deletarPessoa() {
     if (pessoas.empty()) {
-        cout << "Nenhuma pessoa cadastrada." << endl;
+        cout << "Nenhum perfil cadastrado." << endl;
     } else {
         string nome;
-        cout << "Digite o nome da pessoa que deseja deletar: ";
-        cin.ignore(); // ignora o buffering do enter para que não de conflito de hash
+        cout << "Digite o nome da pessoa que deseja deletar o perfil: ";
+        cin.ignore();
         getline(cin, nome);
+    // -------------------------------------------------------------------
         bool encontrou = false;
-
         for (auto it = pessoas.begin(); it != pessoas.end(); ++it) {
             if (it->nome == nome) {
                 pessoas.erase(it);
                 encontrou = true;
-                cout << "Pessoa deletada com sucesso!" << endl;
+                cout << "Perfil deletado com sucesso!" << endl;
                 break;
             }
         }
         if (!encontrou) {
-            cout << "Pessoa não encontrada." << endl;
+            cout << "Perfil não encontrado." << endl;
         }
     }
 }
-    // -------------------------------------------------------------------
-
-// Menu
+// -------------------------------------------------------------------
 int main() {
     setlocale(LC_ALL, "Portuguese");
     int opcao;
-
+// -------------------------------------------------------------------
     while (true) {
-        cout << "=== Menu ===" << endl;
-        cout << "1. Criar pessoa" << endl;
-        cout << "2. Listar pessoas" << endl;
-        cout << "3. Atualizar pessoa" << endl;
-        cout << "4. Deletar pessoa" << endl;
-        cout << "5. Sair" << endl;
+        cout << "=== Menu ==="          << endl;
+        cout << "1. Criar perfil"       << endl;
+        cout << "2. Listar perfis"     << endl;
+        cout << "3. Atualizar perfil"   << endl;
+        cout << "4. Deletar perfil"     << endl;
+        cout << "5. Sair"               << endl;
         cout << "Digite a opção desejada: ";
         cin >> opcao;
-        //cin.ignore(numeric_limits<streamsize>::max(), '\n'); // dando erro, verificar.
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa todo o buffer até a quebra de linha
     // -------------------------------------------------------------------
         switch (opcao) {
             case 1:
