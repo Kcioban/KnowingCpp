@@ -49,8 +49,8 @@ void carregarDados() {
 
 void criarPessoa() {
     Pessoa pessoa;
-    cout << "Para iniciar a criaÃ§Ã£o do seu perfil. " << endl;
-    cout << "Digite o cÃ³digo: ";
+    cout << "Para iniciar a criacao do seu perfil. " << endl;
+    cout << "Digite o codigo: ";
     cin >> pessoa.codigo;
 
     cout << "Digite o nome: ";
